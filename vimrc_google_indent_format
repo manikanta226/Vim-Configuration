@@ -1,0 +1,127 @@
+set nocompatible              " be iMproved, required                           
+filetype off                  " required                                        
+                                                                                
+" set the runtime path to include Vundle and initialize                         
+set rtp+=~/.vim/bundle/Vundle.vim                                               
+call vundle#begin()                                                             
+" alternatively, pass a path where Vundle should install plugins                
+"call vundle#begin('~/some/path/here')                                          
+                                                                                
+" let Vundle manage Vundle, required                                            
+Plugin 'VundleVim/Vundle.vim'                                                   
+                                                                                
+" Indentline                                                                    
+Plugin 'yggdroot/indentline'                                                    
+                                                                                
+" for color scheme                                                              
+Plugin 'morhetz/gruvbox'                                                        
+Plugin 'ap/vim-css-color'                                                       
+                                                                                
+                                                                                
+" google code format                                                            
+Plugin 'google/vim-maktaba'                                                     
+Plugin 'google/vim-codefmt'                                                     
+Plugin 'google/vim-glaive'                                                      
+                                                                                
+" git support                                                                   
+Plugin 'tpope/vim-fugitive'                                                     
+                                                                                
+"tag bar                                                                        
+Plugin 'majutsushi/tagbar'                                                      
+                                                                                
+" airline status bar                                                            
+Plugin 'vim-airline/vim-airline'                                                
+                                                                                
+" call tree                                                                     
+Plugin 'hari-rangarajan/cctree'                                                 
+                                                                                
+" All of your Plugins must be added before the following line                   
+call vundle#end()            " required                                         
+filetype plugin indent on    " required                                         
+" To ignore plugin indent changes, instead use:                                 
+"filetype plugin on                                                             
+"                                                                               
+" Brief help                                                                    
+" :PluginList       - lists configured plugins                                  
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache       
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"                                                                               
+" see :h vundle for more details or wiki for FAQ                                
+" Put your non-Plugin stuff after this line                                     
+"""""""""""""""""""""""""""""""""""""""""""""""""                               
+                                                                                
+                                                                                
+" Indentline                                                                    
+let g:indentLine_setColors = 0                                                  
+let g:indentLine_char = 'c'                                                     
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']                               
+""""""""""""""""""""""""""""""""""""""""""""""""                                
+                                                                                
+" color scheme and other basic settings                                         
+colorscheme gruvbox                                                             
+set guifont=Monospace\ 10                                                       
+set fillchars+=vert:\$                                                          
+syntax enable                                                                   
+set background=dark                                                             
+set ruler                                                                       
+set hidden                                                                      
+set number                                                                      
+set laststatus=2                                                                
+set smartindent                                                                 
+set st=4 sw=4 et                                                                
+set shiftwidth=4                                                                
+set tabstop=4                                                                   
+let &colorcolumn="80"                                                           
+""""""""""""""""""""""""""""""""""""""""                                        
+" google code formater                                                          
+                                                                                
+set shell=/bin/sh                                                               
+                                                                                
+call glaive#Install()                                                           
+Glaive codefmt plugin[mappings]                                                 
+Glaive codefmt google_java_executable="java -jar /usr2/c_sai/google-java-format-1.7-all-deps.jar --aosp"
+Glaive codefmt clang_format_style="google"                                      
+                                                                                
+augroup autoformat_settings                                                     
+  autocmd FileType bzl AutoFormatBuffer buildifier                              
+  autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format         
+  autocmd FileType dart AutoFormatBuffer dartfmt                                
+  autocmd FileType go AutoFormatBuffer gofmt                                    
+  autocmd FileType gn AutoFormatBuffer gn                                       
+  autocmd FileType html,css,json AutoFormatBuffer js-beautify                   
+  autocmd FileType java AutoFormatBuffer google-java-format                     
+  autocmd FileType python AutoFormatBuffer yapf                                 
+  " Alternative: autocmd FileType python AutoFormatBuffer autopep8              
+augroup END                                                                     
+                                                                                
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+                                                                                
+"Tag bar                                                                        
+nmap <F8> :TagbarToggle<CR>                                                     
+                                                                                
+                                                                                
+" airline status bar                                                            
+let g:airline#extensions#tabline#enabled = 1                                    
+                                                                                
+" C call tree                                                                   
+let g:CCTreeKeyTraceForwardTree = '<C-\>>'                                      
+let g:CCTreeKeyTraceReverseTree = '<C-\><'                                      
+let g:CCTreeKeyHilightTree = '<C-l>'        " Static highlighting               
+let g:CCTreeKeySaveWindow = '<C-\>y'                                            
+let g:CCTreeKeyToggleWindow = '<C-\>w'                                          
+let g:CCTreeKeyCompressTree = 'zs'     " Compress call-tree                     
+let g:CCTreeKeyDepthPlus = '<C-\>='                                             
+let g:CCTreeKeyDepthMinus = '<C-\>-'         
+
+""""""""""""""""""""""""""""""""""""""""                                        
+""""""""""""MANIKANTA"""""""""""""""""""                                        
+""""""""""""""""""""""""""""""""""""""""                                        
+                                                                                
+                                                                                
+set clipboard=unnamed                                                           
+vmap <a-c> "*y                                                                  
+imap <a-p> "*p                                                                  
+                                                                                
+"disable default mouse click to visual mode                                     
+"set mouse-=a                    
